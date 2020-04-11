@@ -1,5 +1,5 @@
 {
-  "name": "/Users/john/Spring2020/CISC474/Project 2/NodeTypescriptStarter",
+  "name": "NodeTypescriptStarter",
   "version": "1.0.0",
   "description": "",
   "main": "dist/server.js",

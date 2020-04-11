@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const body_parser_1 = __importDefault(require("body-parser"));
 const express_1 = __importDefault(require("express"));
+const EventsRouter_1 = require("./EventsHandling/EventsRouter");
 const router_1 = require("./router");
 class Application {
     constructor() {
@@ -35,6 +36,7 @@ class Application {
     // setup routes for the express server
     buildRoutes() {
         this.app.use("/api", new router_1.ApiRouter().getRouter());
+        this.app.use("/api", new EventsRouter_1.EventsRouter().getRouter());
     }
 }
 new Application().start();
