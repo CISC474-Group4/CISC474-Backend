@@ -1,5 +1,5 @@
 {
-  "name": "nodetscstarter",
+  "name": "/Users/john/Spring2020/CISC474/Project 2/NodeTypescriptStarter",
   "version": "1.0.0",
   "description": "",
   "main": "dist/server.js",
@@ -33,13 +33,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gsilber/NodeTypescriptStarter.git"
+    "url": "git+https://github.com/zendelleUD/NodeTypescriptStarter.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/gsilber/NodeTypescriptStarter/issues"
+    "url": "https://github.com/zendelleUD/NodeTypescriptStarter/issues"
   },
-  "homepage": "https://github.com/gsilber/NodeTypescriptStarter#readme"
+  "homepage": "https://github.com/zendelleUD/NodeTypescriptStarter#readme"
 }
