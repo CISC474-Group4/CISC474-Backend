@@ -12,8 +12,8 @@ class EventsRouter {
     }
     // Creates the routes for this router and returns a populated router object
     getRouter() {
-        this.router.get("/events", this.eventscontroller.getHello);
-        this.router.post("/events", this.eventscontroller.postHello);
+        this.router.get("/events/:id", this.eventscontroller.getEvents); // get events
+        this.router.post("/events", this.eventscontroller.postEvents); // create new events
         return this.router;
     }
 }

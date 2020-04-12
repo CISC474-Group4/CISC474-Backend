@@ -2,6 +2,7 @@ import bodyParser from "body-parser";
 import express from "express";
 
 import { EventsRouter } from "./EventsHandling/EventsRouter";
+import { RestaurantRouter} from "./Restaurant/RestaurantRouter";
 import {ApiRouter} from "./router";
 
 class Application {
@@ -37,7 +38,9 @@ class Application {
     // setup routes for the express server
     public buildRoutes(): void {
         this.app.use("/api", new ApiRouter().getRouter());
-        this.app.use("/api", new EventsRouter().getRouter());
+        this.app.use("/api", new EventsRouter().getRouter()); // Router Builder for Events
+        this.app.use("/api", new RestaurantRouter().getRouter());// Router for Restaurants
+        // TODO: ADD ROUTE BUILDER FOR USERS
     }
 }
 new Application().start();

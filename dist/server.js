@@ -36,7 +36,9 @@ class Application {
     // setup routes for the express server
     buildRoutes() {
         this.app.use("/api", new router_1.ApiRouter().getRouter());
-        this.app.use("/api", new EventsRouter_1.EventsRouter().getRouter());
+        this.app.use("/api", new EventsRouter_1.EventsRouter().getRouter()); // Router Builder for Events
+        // TODO: ADD ROUTE BUILDER FOR RESTAURANTS
+        // TODO: ADD ROUTE BUILDER FOR USERS
     }
 }
 new Application().start();
