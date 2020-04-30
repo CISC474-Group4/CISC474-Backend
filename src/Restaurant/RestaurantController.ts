@@ -1,7 +1,10 @@
 import express from "express";
 import { request } from "http";
+import { Database } from '../common/MongoDB';
+import { Config } from '../config';
 
 export class RestaurantController {
+    static db: Database = new Database(Config.url, "projects");
 
     public getRestaurant(req: express.Request, res: express.Response): void {
         console.log(req.params.id);
