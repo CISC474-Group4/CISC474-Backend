@@ -8,14 +8,14 @@ export class UserController {
     static db: Database = new Database(Config.url, 'user');
     static userTable = 'user';
 
-    public getUsers(req: express.Request, res: express.Response): void {
-        console.log(req.params.id);
-        res.send(req.body);
-        console.log("output");
-
+    public getUser(req: express.Request, res: express.Response): void { // this will send a json object of the user that matches the requested name. This should be the main get method that is utilized for Users
+        const name = req.params.name;
+        UserController.db.getOneRecord(UserController.userTable, { name: name})
+            .then((results) => res.send({ fn: 'getUser', status: 'success', data: results }).end())
+            .catch((reason) => res.status(500).send(reason).end());
     }
     public postUsers(req: express.Request, res: express.Response): void {
-        const use: UserModel = UserModel.fromObject(req.body);
+        const use: UserModel = UserModel.fromObject(req.body); // this is representing the user object that is being added to our database
 
         UserController.db.addRecord(UserController.userTable, use.toObject())
             .then((result: boolean) => res.send({fn: 'addRestaurant', status: 'success'}).end())
@@ -23,9 +23,9 @@ export class UserController {
     }
 
     public deleteUsers(req: express.Request, res: express.Response): void{
-        const id = Database.stringToId(req.params.id);
+        const id = req.params.id;
 
-        UserController.db.deleteRecord(UserController.userTable, {_id: id})
+        UserController.db.deleteRecord(UserController.userTable, {id: id})
             .then((results) => results ? (res.send({fn: 'deleteRestaurant', status: 'success' })) : (res.send({fn: 'deleteRestaurant', status: 'failure', data: 'Not found' })).end())
             .catch((reason) => res.status(500).send(reason).end());
     }
