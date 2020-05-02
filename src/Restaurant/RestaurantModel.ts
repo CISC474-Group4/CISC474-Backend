@@ -15,7 +15,9 @@ export class RestaurantModel{
 
     toObject():any{
         return{
-            name:this.name
+            name:this.name,
+            tags:this.tags,
+            events:this.events
         };
     }
 }

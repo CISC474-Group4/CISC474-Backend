@@ -34,4 +34,9 @@ export class RestaurantController {
         console.log("getting all resetaurant")
     }
 
+    public updateRestaurant(req: express.Request, res: express.Response){ // this is going to serve to update restaurant details, events, and tags
+        // we may make extra methods for the other things, but we'll evaluate this as we go along
+
+    }
+
 }

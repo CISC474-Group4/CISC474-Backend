@@ -19,7 +19,7 @@ export class UserController {
         UserController.db.getRecords(UserController.userTable)
             .then(results => {
                 let restaurants = results.map((x: any) => x.restaurants);
-                
+                // need to finish this. Want to get a list of restaurants for the name that is matched to what is in the req data
             })
     }
     public postUsers(req: express.Request, res: express.Response): void {
