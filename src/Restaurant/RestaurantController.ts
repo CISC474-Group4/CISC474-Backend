@@ -15,11 +15,13 @@ export class RestaurantController {
 
     }
     public postRestaurant(req: express.Request, res: express.Response){
-        const resta: RestaurantModel = RestaurantModel.fromObject(req.body);
+        res.send(req.body);
 
-        RestaurantController.db.addRecord(RestaurantController.restaurantTable, resta.toObject())
-            .then((result: boolean) => res.send({fn: 'addRestaurant', status: 'success'}).end())
-            .catch((reason) => res.status(500).send(reason).end());
+        // const resta: RestaurantModel = RestaurantModel.fromObject(req.body);
+
+        // RestaurantController.db.addRecord(RestaurantController.restaurantTable, resta.toObject())
+        //     .then((result: boolean) => res.send({fn: 'addRestaurant', status: 'success'}).end())
+        //     .catch((reason) => res.status(500).send(reason).end());
     }
 
     public deleteRestaurant(req: express.Request, res: express.Response): void{
