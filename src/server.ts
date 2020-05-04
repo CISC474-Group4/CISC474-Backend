@@ -1,9 +1,7 @@
 import bodyParser from "body-parser";
 import express from "express";
-import * as mongodb from 'mongodb';
-// import cors from "cors"; Express middle ware 
-
-
+import * as mongodb from "mongodb";
+// import cors from "cors"; Express middle ware
 
 import { EventsRouter } from "./EventsHandling/EventsRouter";
 import { RestaurantRouter} from "./Restaurant/RestaurantRouter";
@@ -43,7 +41,7 @@ class Application {
     public buildRoutes(): void {
         this.app.use("/api", new ApiRouter().getRouter());
         this.app.use("/api", new EventsRouter().getRouter()); // Router Builder for Events
-        this.app.use("/api", new RestaurantRouter().getRouter());// Router for Restaurants
+        this.app.use("/api", new RestaurantRouter().getRouter()); // Router for Restaurants
         // TODO: ADD ROUTE BUILDER FOR USERS
     }
 }

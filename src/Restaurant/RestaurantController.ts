@@ -14,12 +14,12 @@ export class RestaurantController {
         res.send(req.body.name);
     }
 
-    public deleteRestaurant(req: express.Request, res: express.Response): void{
-        console.log("delete event: "+ req.params.id);
+    public deleteRestaurant(req: express.Request, res: express.Response): void {
+        console.log("delete event: " + req.params.id);
     }
 
     public getAllRestaurants(req: express.Request, res: express.Response): void {
-        console.log("getting all resetaurant")
+        console.log("getting all resetaurant");
     }
 
 }

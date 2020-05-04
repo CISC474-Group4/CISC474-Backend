@@ -1,5 +1,5 @@
 {
-  "name": "NodeTypescriptStarter",
+  "name": "Project2-Backend",
   "version": "1.0.0",
   "description": "",
   "main": "dist/server.js",
@@ -35,13 +35,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zendelleUD/NodeTypescriptStarter.git"
+    "url": "git+https://github.com/CISC474-Group4/Project2-Backend.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/zendelleUD/NodeTypescriptStarter/issues"
+    "url": "https://github.com/CISC474-Group4/Project2-Backend/issues"
   },
-  "homepage": "https://github.com/zendelleUD/NodeTypescriptStarter#readme"
+  "homepage": "https://github.com/CISC474-Group4/Project2-Backend#readme"
 }

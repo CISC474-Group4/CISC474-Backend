@@ -14,12 +14,12 @@ export class UsersController {
         res.send(req.body.name);
     }
 
-    public deleteUsers(req: express.Request, res: express.Response): void{
-        console.log("delete event: "+ req.params.id);
+    public deleteUsers(req: express.Request, res: express.Response): void {
+        console.log("delete event: " + req.params.id);
     }
 
     public getAllUsers(req: express.Request, res: express.Response): void {
-        console.log("getting all resetaurant")
+        console.log("getting all resetaurant");
     }
 
 }
