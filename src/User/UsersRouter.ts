@@ -11,7 +11,7 @@ export class RestaurantRouter {
         this.router.get("/users/:id", this.eventscontroller.getUser); //Get Users by ID
         this.router.post("/users", this.eventscontroller.postUsers); // create new user
         this.router.delete("/users/:id", this.eventscontroller.deleteUsers);//Deletes user with matching ID
-        this.router.get("/users", this.eventscontroller.getAllUsers);// GETS a list of users
+        //this.router.get("/users", this.eventscontroller.getAllUsers);// GETS a list of users
         
         return this.router;
     }
