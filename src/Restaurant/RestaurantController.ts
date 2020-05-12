@@ -39,11 +39,11 @@ export class RestaurantController {
                     !array.filter((v,i) => value === v && i < index).length);
                 res.send({fn: 'deleteRestaurant', status: 'success', data: {restaurants: restaurants}})
             })
-            .catch((reason) => res.status(500).send(reason).end());
+            .catch((reason) => res.status(500).send(reason).end()); 
     }
 
     /*public updateRestaurantTags(req: express.Request, res: express.Response){ // this is going to serve to update restaurant details, events, and tags
-        const 
+        const
 
     }*/
 
