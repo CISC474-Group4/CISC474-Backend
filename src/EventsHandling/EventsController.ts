@@ -90,4 +90,12 @@ export class EventsController {
             .catch((reason) => res.status(500).send(reason).end());
     }
 
+    public updateEvent(req: express.Request, res: express.Response): void{
+        const title = req.params.title;
+
+        EventsController.db.updateRecord(EventsController.EventsTable, {title: title}, {$set: req.body})
+            .then((results) => results ? (res.send({fn: 'updateEvent', status: 'success'})) : (res.send({fn: 'updateEvent', status: 'failure', data: 'Not found'})).end())
+            .catch(err => res.send({fn: 'updateEvent', status: 'failure', data: err}).end());
+    }
+
 }
