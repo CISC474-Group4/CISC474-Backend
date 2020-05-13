@@ -1,6 +1,9 @@
 export class RestaurantModel{
     name='';
     tags:string[] = [];
+    description = '';
+    address = '';
+    restImg = '';
     events: any[] = [];
 
 
@@ -10,6 +13,9 @@ export class RestaurantModel{
         r.name = object.name;
         r.tags = object.tags;
         r.events = object.events;
+        r.description = object.description;
+        r.address = object.address;
+        r.restImg = object.restImg;
         return r;
     }
 
@@ -17,7 +23,10 @@ export class RestaurantModel{
         return{
             name:this.name,
             tags:this.tags,
-            events:this.events
+            events:this.events,
+            description:this.description,
+            address:this.address,
+            restImg:this.restImg
         };
     }
 }
