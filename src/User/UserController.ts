@@ -44,7 +44,7 @@ export class UserController {
     public updateUser(req: express.Request, res: express.Response) {
         const restaurants = req.params.restaurants;
         const data = req.body;
-
+        delete data.authUser;
         UserController.db.updateRecord(UserController.userTable, { restaurants: restaurants }, { $set: req.body })
             .then((results) => results ? (res.send({ fn: 'updateUser', status: 'success' })) : (res.send({ fn: 'updateUser', status: 'failure', data: 'Not found' })).end())
             .catch(err => res.send({ fn: 'updateUser', status: 'failure', data: err }).end())

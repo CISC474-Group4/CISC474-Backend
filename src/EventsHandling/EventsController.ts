@@ -71,7 +71,7 @@ export class EventsController {
 
     /**
      * Description:
-     *  Returns all unique event titles within the DataBase 
+     *  Returns all unique events within the DataBase 
      * Once these are returned, users can search by title to get more information about a specific event
      * Running a getRecords() over the database, and then just extracting titles
      * @param req 
@@ -97,5 +97,16 @@ export class EventsController {
             .then((results) => results ? (res.send({fn: 'updateEvent', status: 'success'})) : (res.send({fn: 'updateEvent', status: 'failure', data: 'Not found'})).end())
             .catch(err => res.send({fn: 'updateEvent', status: 'failure', data: err}).end());
     }
+
+    /**
+     * Description:
+     * Returns all unique events that fit within a certain time frame.
+     * @param req
+     * @param res
+     */
+
+     public getEventByTime(req: express.Request, res: express.Response): void{
+         EventsController.db.getRecords(EventsController.EventsTable)
+     }
 
 }
