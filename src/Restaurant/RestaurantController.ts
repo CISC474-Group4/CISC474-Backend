@@ -9,16 +9,17 @@ export class RestaurantController {
     static restaurantTable = 'restaurant';
 
     public getRestaurant(req: express.Request, res: express.Response): void {
-        console.log(req.params.id);
-        res.send(req.body);
-        console.log("output");
+        const name = req.params.name;
+        RestaurantController.db.getOneRecord(RestaurantController.restaurantTable, {name: name})
+            .then((results) => res.send({fn: 'getRestaurant', status: 'success', data: results}).end())
+            .catch((reason) => res.status(500).send(reason).end());
 
     }
     public postRestaurant(req: express.Request, res: express.Response){
         const resta: RestaurantModel = RestaurantModel.fromObject(req.body);
 
         RestaurantController.db.addRecord(RestaurantController.restaurantTable, resta.toObject())
-            .then((result: boolean) => res.send({fn: 'addRestaurant', status: 'success'}).end())
+            .then((result: boolean) => res.send({fn: 'postRestaurant', status: 'success'}).end())
             .catch((reason) => res.status(500).send(reason).end());
     }
 
@@ -30,12 +31,23 @@ export class RestaurantController {
             .catch((reason) => res.status(500).send(reason).end());
     }
 
-    public getAllRestaurants(req: express.Request, res: express.Response): void {
-        console.log("getting all resetaurant")
+    public getAllRestaurants(req: express.Request, res: express.Response): void { // return all valid unique restaurant names in the database
+        RestaurantController.db.getRecords(RestaurantController.restaurantTable)
+            .then(results => {
+                let restaurants = results.map((x:any) => x.name);
+                restaurants = restaurants.filter((value: string, index: number, array: any[]) =>
+                    !array.filter((v,i) => value === v && i < index).length);
+                res.send({fn: 'deleteRestaurant', status: 'success', data: {restaurants: restaurants}})
+            })
+            .catch((reason) => res.status(500).send(reason).end()); 
     }
 
     public updateRestaurant(req: express.Request, res: express.Response){ // this is going to serve to update restaurant details, events, and tags
-        // we may make extra methods for the other things, but we'll evaluate this as we go along
+        const name = req.params.name;
+        
+        RestaurantController.db.updateRecord(RestaurantController.restaurantTable, {name: name}, {$set: req.body})
+            .then((results) => results ? (res.send({fn: 'updateRestaurant', status: 'success'})) : (res.send({fn: 'updateRestaurant', status: 'failure', data: 'Not found'})).end())
+            .catch(err => res.send({fn: 'updateRestaurant', status: 'failure', data: err}).end());
 
     }
 
