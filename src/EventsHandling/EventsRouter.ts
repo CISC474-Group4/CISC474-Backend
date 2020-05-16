@@ -1,21 +1,27 @@
 import express from "express";
 import {EventsController} from "./EventsController";
+import { AppRouter } from "../common/AppRouter";
 
-export class EventsRouter {
-
-    private router: express.Router = express.Router();
-    private eventscontroller: EventsController = new EventsController();
 
     // Creates the routes for this router and returns a populated router object
-    public getRouter(): express.Router {
-        this.router.get("/events/:restaurant", this.eventscontroller.getEvents); //Get Events by ID
-        this.router.get("/events/:title", this.eventscontroller.getEvent);
-        this.router.post("/events", this.eventscontroller.postEvents); // create new events
-        this.router.delete("/events/:title", this.eventscontroller.deleteEvent);//Deletes event with matching ID
-        this.router.get("/events", this.eventscontroller.getAllEvents);// GETS a list of ALL unique event titles
-        this.router.patch("/events:title", this.eventscontroller.updateEvent);
+    // public getRouter(): express.Router {
+    //     this.router.get("/events/:restaurant", this.eventscontroller.getEvents); //Get Events by ID
+    //     this.router.get("/events/:title", this.eventscontroller.getEvent);
+    //     this.router.post("/events", this.eventscontroller.postEvents); // create new events
+    //     this.router.delete("/events/:title", this.eventscontroller.deleteEvent);//Deletes event with matching ID
+    //     this.router.get("/events", this.eventscontroller.getAllEvents);// GETS a list of ALL unique event titles
+    //     this.router.patch("/events:title", this.eventscontroller.updateEvent);
 
 
-        return this.router;
+    //     return this.router;
+    // }
+
+    export class EventsRouter extends AppRouter{
+        static projController: EventsController=new EventsController();
+        constructor(){super();}
+    
+        //sets up the routes within this module shows an example of a route that requires authorization, and one that does not
+        setupRoutes(): void {      
+            this.expressRouter.post('/',EventsRouter.projController.addEvents);
+        }    
     }
-}

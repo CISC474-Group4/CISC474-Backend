@@ -1,72 +1,71 @@
-import { MongoClient, FilterQuery, ObjectID } from 'mongodb';
-
+import { FilterQuery, MongoClient, ObjectID } from "mongodb";
 
 export class Database {
 
-    //constructor
-    //url: the connection url for the mongo server
-    //dbName: the name of the database to access
-    constructor(private url: string, private dbName: string) { }
-
-    //converts a string to a mongodb object id
-    static stringToId(id:string):ObjectID{
+    // converts a string to a mongodb object id
+    public static stringToId(id: string): ObjectID {
         return new ObjectID(id);
     }
-    //addRecord
+
+    // constructor
+    // url: the connection url for the mongo server
+    // dbName: the name of the database to access
+    constructor(private url: string, private dbName: string) { }
+    // addRecord
     // collection: the name of the collection to add the record to.
     // object: a javascript object to store in the collection
     // returns a promise to an array of records
-    addRecord(collection: string, object: any): Promise<boolean>{
-        var dbname = this.dbName;
-        var url=this.url;
-        return new Promise(function(resolve,reject){
-            MongoClient.connect(url, function (err, db) {
-                if (err) reject(err);
+    public addRecord(collection: string, object: any): Promise<boolean> {
+        let dbname = this.dbName;
+        let url = this.url;
+        return new Promise(function(resolve, reject) {
+            MongoClient.connect(url, function(err, db) {
+                if (err) { reject(err); }
                 const dbo = db.db(dbname);
-                dbo.collection(collection).insertOne(object,(err, result) => {
-                    if (err) reject(err);
+                dbo.collection(collection).insertOne(object, (err, result) => {
+                    if (err) { reject(err); }
                     db.close();
                     resolve(true);
                 });
             });
-                
+
         });
     }
 
-    //updateRecord
+    // updateRecord
     // collection: the name of the collection to update the record to.
     // object: a javascript object to store in the collection
     // returns a promise to a boolean indicating success
-    updateRecord(collection: string, filter:any, update: any): Promise<boolean>{
-        var dbname = this.dbName;
-        var url=this.url;
-        return new Promise(function(resolve,reject){
-            MongoClient.connect(url, function (err, db) {
-                if (err) reject(err);
+    public updateRecord(collection: string, filter: any, update: any): Promise<boolean> {
+        let dbname = this.dbName;
+        let url = this.url;
+        return new Promise(function(resolve, reject) {
+            MongoClient.connect(url, function(err, db) {
+                if (err) { reject(err); }
                 const dbo = db.db(dbname);
-                dbo.collection(collection).updateOne(filter,update,(err, result) => {
-                    if (err) reject(err);
+                dbo.collection(collection).updateOne(filter, update, (err, result) => {
+                    if (err) { reject(err); }
                     db.close();
-                    resolve(result.matchedCount==1);
+                    resolve(result.matchedCount == 1);
                 });
             });
-                
+
         });
     }
 
-    //getRecords
+    // getRecords
     // collection: the name of the collection to get from.
     // query: a mongo query object
     // returns a promise to an array of records
-    getRecords(collection: string, query: FilterQuery<any> = {}): Promise<any> {
-        var dbname = this.dbName;
-        var url=this.url;
-        return new Promise(function (resolve, reject) {            
-            MongoClient.connect(url, function (err, db) {
-                if (err) reject(err);
+    public getRecords(collection: string, query: FilterQuery<any> = {}): Promise<any> {
+        let dbname = this.dbName;
+        let url = this.url;
+        return new Promise(function(resolve, reject) {
+            MongoClient.connect(url, function(err, db) {
+                if (err) { reject(err); }
                 const dbo = db.db(dbname);
                 dbo.collection(collection).find(query).toArray((err, result) => {
-                    if (err) reject(err);
+                    if (err) { reject(err); }
                     db.close();
                     resolve(result);
                 });
@@ -74,19 +73,19 @@ export class Database {
         });
     }
 
-    //getOneRecords
+    // getOneRecords
     // collection: the name of the collection to get from.
     // query: a mongo query object
     // returns a promise to a single records
-    getOneRecord(collection: string, query: FilterQuery<any> = {}): Promise<any> {
-        var dbname = this.dbName;
-        var url=this.url;
-        return new Promise(function (resolve, reject) {            
-            MongoClient.connect(url, function (err, db) {
-                if (err) reject(err);
+    public getOneRecord(collection: string, query: FilterQuery<any> = {}): Promise<any> {
+        let dbname = this.dbName;
+        let url = this.url;
+        return new Promise(function(resolve, reject) {
+            MongoClient.connect(url, function(err, db) {
+                if (err) { reject(err); }
                 const dbo = db.db(dbname);
                 dbo.collection(collection).findOne(query, (err, result) => {
-                    if (err) reject(err);
+                    if (err) { reject(err); }
                     db.close();
                     resolve(result);
                 });
@@ -94,21 +93,21 @@ export class Database {
         });
     }
 
-    //deleteRecord
+    // deleteRecord
     // collection: the name of the collection to get from.
     // query: a mongo query object
     // returns a promise to a boolean indicating success
-    deleteRecord(collection: string,query: FilterQuery<any>={}): Promise<boolean>{
-        var dbname = this.dbName;
-        var url=this.url;
-        return new Promise(function (resolve, reject) {            
-            MongoClient.connect(url, function (err, db) {
-                if (err) reject(err);
+    public deleteRecord(collection: string, query: FilterQuery<any>= {}): Promise<boolean> {
+        let dbname = this.dbName;
+        let url = this.url;
+        return new Promise(function(resolve, reject) {
+            MongoClient.connect(url, function(err, db) {
+                if (err) { reject(err); }
                 const dbo = db.db(dbname);
                 dbo.collection(collection).deleteOne(query, (err, result) => {
-                    if (err) reject(err);
+                    if (err) { reject(err); }
                     db.close();
-                    resolve(result.deletedCount==1);
+                    resolve(result.deletedCount == 1);
                 });
             });
         });
