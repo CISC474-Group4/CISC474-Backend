@@ -33,12 +33,10 @@ export class EventsController {
 
      public getEvents(req: express.Request, res: express.Response):void{
          const restaurant = req.params.restaurant;
-
+        // getting all records from the database that have the same restaurant value stored in their object
          EventsController.db.getRecords(EventsController.EventsTable, {restaurant: restaurant})
-            .then(results => {
-                let events = results.map((x:any) => x.title);
-                events = events.filter((value: string))
-            })
+            .then((results) => res.send({fn: 'getEvents', status: 'success', data: results}).end())
+            .catch((reason) => res.status(500).send(reason).end());
      }
 
     /**
@@ -58,7 +56,7 @@ export class EventsController {
 
     /**
      * Description:
-     *  Deletes events that match Event Name
+     *  Deletes event that matches title
      * 
      * @param req 
      * @param res 
@@ -73,12 +71,42 @@ export class EventsController {
 
     /**
      * Description:
-     *  Returns all events within the DataBase
+     *  Returns all unique events within the DataBase 
+     * Once these are returned, users can search by title to get more information about a specific event
+     * Running a getRecords() over the database, and then just extracting titles
      * @param req 
      * @param res 
      */
     public getAllEvents(req: express.Request, res: express.Response): void {
-        console.log("getting all events")
+        EventsController.db.getRecords(EventsController.EventsTable)
+            .then(results => {
+                // extracting Event Title only
+                let titles = results.map((x: any) => x.title);
+                // removing duplicates
+                titles = titles.filter((value: string, index: number, array: any[]) =>
+                    !array.filter((v,i) => value === v && i < index).length);
+                res.send({fn: 'deleteEvent', status: 'success', data: {titles: titles} })
+            })
+            .catch((reason) => res.status(500).send(reason).end());
     }
+
+    public updateEvent(req: express.Request, res: express.Response): void{
+        const title = req.params.title;
+
+        EventsController.db.updateRecord(EventsController.EventsTable, {title: title}, {$set: req.body})
+            .then((results) => results ? (res.send({fn: 'updateEvent', status: 'success'})) : (res.send({fn: 'updateEvent', status: 'failure', data: 'Not found'})).end())
+            .catch(err => res.send({fn: 'updateEvent', status: 'failure', data: err}).end());
+    }
+
+    /**
+     * Description:
+     * Returns all unique events that fit within a certain time frame.
+     * @param req
+     * @param res
+     */
+
+     public getEventByTime(req: express.Request, res: express.Response): void{
+         EventsController.db.getRecords(EventsController.EventsTable)
+     }
 
 }

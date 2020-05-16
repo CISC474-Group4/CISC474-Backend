@@ -12,6 +12,7 @@ export class RestaurantRouter {
         this.router.post("/restaurants", this.eventscontroller.postRestaurant); // create new events
         this.router.delete("/restuarants/:name", this.eventscontroller.deleteRestaurant);//Deletes event with matching ID
         this.router.get("/restaurants", this.eventscontroller.getAllRestaurants);// GETS a list of restaurants
+        this.router.patch("/restaurants:name", this.eventscontroller.updateRestaurant);
         
         
         return this.router;
