@@ -1,5 +1,5 @@
 {
-  "name": "NodeTypescriptStarter",
+  "name": "backendapi",
   "version": "1.0.0",
   "description": "",
   "main": "dist/server.js",
@@ -29,12 +29,12 @@
     "lint": "tslint -c tslint.json -p tsconfig.json --fix",
     "tsc": "tsc",
     "build": "npm-run-all clean lint tsc",
-    "dev-deb": "ts-node-dev --respawn --transpileOnly --nolazy --inspect-brk=5858 ./src/server.ts",
-    "dev": "ts-node-dev --respawn --transpileOnly ./src/server.ts",
+    "dev-deb": "ts-node-dev --respawn --transpileOnly --nolazy --inspect-brk=5858 ./src/app.ts",
+    "dev": "ts-node-dev --respawn --transpileOnly ./src/app.ts",
     "prod": "npm-run-all build start",
     "prod-deb": "npm-run-all start-deb",
-    "start": "nodemon --nolazy ./dist/server.js",
-    "start-deb": "nodemon --nolazy --inspect-brk=5858 ./dist/server.js",
+    "start": "nodemon ./src/app.ts",
+    "start-deb": "nodemon --nolazy --inspect-brk=5858 ./src/src.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

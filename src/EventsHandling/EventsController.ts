@@ -8,15 +8,62 @@ export class EventsController {
     static db: Database = new Database(Config.url, "events");
     static EventsTable = 'events';
 
-    //addProject
-    //adds the project to the database
+    //addEvent
+    //adds the Event to the database
     addEvents(req: express.Request, res: express.Response) {
         const proj: EventsModel = EventsModel.fromObject(req.body);
         // console.log(req.body);
         console.log("reached");
         EventsController.db.addRecord(EventsController.EventsTable, proj.toObject())
-            .then((result: boolean) => res.send({ fn: 'addProject', status: 'success' }).end())
+            .then((result: boolean) => res.send({ fn: 'addEvent', status: 'success' }).end())
             .catch((reason) => res.status(500).send(reason).end());
+    }
+
+
+    getAllEvents(req: express.Request, res: express.Response) {
+        EventsController.db.getRecords(EventsController.EventsTable)
+            .then((results) => res.send({ fn: 'getRestaurantEvents', status: 'success', data: results }).end())
+            .catch((reason) => res.status(500).send(reason).end());
+
+    }
+
+
+
+    /**
+     * Searches events with By Restuarant
+     * Searches by 
+     * 
+     * @param req 
+     * @param res 
+     */
+    getRestaurantEvents(req: express.Request, res: express.Response) {
+        const name = req.params.restaurant;
+        EventsController.db.getRecords(EventsController.EventsTable, { restaurant: name })
+            .then((results) => res.send({ fn: 'getRestaurantEvents', status: 'success', data: results }).end())
+            .catch((reason) => res.status(500).send(reason).end());
+
+    }
+
+
+
+    /**
+     * 
+     */
+    removeEvent(req: express.Request, res: express.Response) {
+        const id = Database.stringToId(req.params.id);
+        EventsController.db.deleteRecord(EventsController.EventsTable, { _id: id })
+            .then((results) => results ? (res.send({ fn: 'deleteEvent', status: 'success' })) : (res.send({ fn: 'deleteEvent', status: 'failure', data: 'Not found' })).end())
+            .catch((reason) => res.status(500).send(reason).end());
+    }
+
+
+    public updateEvent(req: express.Request, res: express.Response): void{
+        const id = Database.stringToId(req.params.id);
+        const data = req.body;
+
+        EventsController.db.updateRecord(EventsController.EventsTable, {_id: id}, {$set: data})
+            .then((results) => results ? (res.send({fn: 'updateEvent', status: 'success'})) : (res.send({fn: 'updateEvent', status: 'failure', data: 'Not found'})).end())
+            .catch(err => res.send({fn: 'updateEvent', status: 'failure', data: err}).end());
     }
 
 
@@ -69,21 +116,6 @@ export class EventsController {
 
     // /**
     //  * Description:
-    //  *  Deletes event that matches title
-    //  * 
-    //  * @param req 
-    //  * @param res 
-    //  */
-    // public deleteEvent(req: express.Request, res: express.Response): void{
-    //     const title = req.params.title;
-
-    //     EventsController.db.deleteRecord(EventsController.EventsTable, {name: name})
-    //         .then((results) => results ? (res.send({fn: 'deleteEvent', status: 'success'})) : (res.send({fn: 'deleteEvent', status: 'failure', data: 'Not found' })).end())
-    //         .catch((reason) => res.status(500).send(reason).end());
-    // }
-
-    // /**
-    //  * Description:
     //  *  Returns all unique events within the DataBase 
     //  * Once these are returned, users can search by title to get more information about a specific event
     //  * Running a getRecords() over the database, and then just extracting titles
@@ -103,13 +135,7 @@ export class EventsController {
     //         .catch((reason) => res.status(500).send(reason).end());
     // }
 
-    // public updateEvent(req: express.Request, res: express.Response): void{
-    //     const title = req.params.title;
-
-    //     EventsController.db.updateRecord(EventsController.EventsTable, {title: title}, {$set: req.body})
-    //         .then((results) => results ? (res.send({fn: 'updateEvent', status: 'success'})) : (res.send({fn: 'updateEvent', status: 'failure', data: 'Not found'})).end())
-    //         .catch(err => res.send({fn: 'updateEvent', status: 'failure', data: err}).end());
-    // }
+    
 
     // /**
     //  * Description:

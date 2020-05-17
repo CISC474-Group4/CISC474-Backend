@@ -17,11 +17,15 @@ import { AppRouter } from "../common/AppRouter";
     // }
 
     export class EventsRouter extends AppRouter{
-        static projController: EventsController=new EventsController();
+        static eventsController: EventsController=new EventsController();
         constructor(){super();}
     
         //sets up the routes within this module shows an example of a route that requires authorization, and one that does not
-        setupRoutes(): void {      
-            this.expressRouter.post('/',EventsRouter.projController.addEvents);
+        setupRoutes(): void {   
+            this.expressRouter.get('/',EventsRouter.eventsController.getAllEvents);   //Get all events
+            this.expressRouter.post('/',EventsRouter.eventsController.addEvents);//Add a New event
+            this.expressRouter.get('/:restaurant',EventsRouter.eventsController.getRestaurantEvents);//GetEvent by Title Name
+            this.expressRouter.delete('/:id', EventsRouter.eventsController.removeEvent);
+            this.expressRouter.put('/:id', EventsRouter.eventsController.updateEvent);
         }    
     }
