@@ -22,7 +22,8 @@ export class EventsController {
 
     getAllEvents(req: express.Request, res: express.Response) {
         EventsController.db.getRecords(EventsController.EventsTable)
-            .then((results) => res.send({ fn: 'getRestaurantEvents', status: 'success', data: results }).end())
+            // .then((results) => res.send({ fn: 'getRestaurantEvents', status: 'success', data: results }).end())
+            .then((results) => res.send(results).end())
             .catch((reason) => res.status(500).send(reason).end());
 
     }

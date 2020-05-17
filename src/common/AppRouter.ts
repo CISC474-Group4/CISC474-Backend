@@ -1,4 +1,5 @@
 import express from "express";
+import multer from 'multer';
 
 /*AppRouter represents a route on the server.  AppRouters can be strung
         together to create a heirarchy */

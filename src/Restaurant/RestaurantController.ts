@@ -16,7 +16,9 @@ export class RestaurantController {
 
     getAllRestaurants(req: express.Request, res: express.Response): void {
         RestaurantController.db.getRecords(RestaurantController.restaurantTable)
-            .then((results) => res.send({fn: 'getRestaurant', status: 'success', data: results}).end())
+            // .then((results) => res.send({fn: 'getRestaurant', status: 'success', data: results}).end())
+            .then((results) => res.send(results).end())
+
             .catch((reason) => res.status(500).send(reason).end());
 
     }
