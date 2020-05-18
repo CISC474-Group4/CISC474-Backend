@@ -5,8 +5,8 @@ import { Database } from '../common/MongoDB';
 import { Config } from '../config';
 
 export class RestaurantController {
-    static db: Database = new Database(Config.url, "restaurant");
-    static restaurantTable = 'restaurant';
+    static db: Database = new Database(Config.url, "data");
+    static restaurantTable = 'restaurants';
 
     public getRestaurant(req: express.Request, res: express.Response): void {
         const name = req.params.name;

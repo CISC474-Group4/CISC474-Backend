@@ -5,8 +5,8 @@ import { Database } from '../common/MongoDB';
 import { Config } from '../config';
 
 export class EventsController {
-    static db: Database = new Database(Config.url, "event");
-    static EventsTable = 'event';
+    static db: Database = new Database(Config.url, "data");
+    static EventsTable = 'events';
 
     /**
      * Description:
@@ -19,7 +19,9 @@ export class EventsController {
         const title = req.params.title;
 
         EventsController.db.getOneRecord(EventsController.EventsTable, {title: title})
-            .then((results) => res.send({fn: 'getEvent', status: 'success', data: results}).end())
+            .then((results) => {
+                res.send({fn: 'getEvent', status: 'success', data: results}).end();
+            })
             .catch((reason) => res.status(500).send(reason).end());
 
     }

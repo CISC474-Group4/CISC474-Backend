@@ -7,7 +7,7 @@ import * as mongodb from 'mongodb';
 
 import { EventsRouter } from "./EventsHandling/EventsRouter";
 import { RestaurantRouter} from "./Restaurant/RestaurantRouter";
-import {ApiRouter} from "./router";
+//import {ApiRouter} from "./router";
 
 class Application {
     public app: express.Application;
@@ -41,9 +41,9 @@ class Application {
     }
     // setup routes for the express server
     public buildRoutes(): void {
-        this.app.use("/api", new ApiRouter().getRouter());
-        this.app.use("/api", new EventsRouter().getRouter()); // Router Builder for Events
-        this.app.use("/api", new RestaurantRouter().getRouter());// Router for Restaurants
+        
+        this.app.use("/api/events", new EventsRouter().getRouter()); // Router Builder for Events
+        this.app.use("/api/restaurants", new RestaurantRouter().getRouter());// Router for Restaurants
         // TODO: ADD ROUTE BUILDER FOR USERS
     }
 }

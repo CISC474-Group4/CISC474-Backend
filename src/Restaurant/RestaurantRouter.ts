@@ -8,11 +8,11 @@ export class RestaurantRouter {
 
     // Creates the routes for this router and returns a populated router object
     public getRouter(): express.Router {
-        this.router.get("/restaurants/:name", this.eventscontroller.getRestaurant); //Get Events by ID
-        this.router.post("/restaurants", this.eventscontroller.postRestaurant); // create new events
-        this.router.delete("/restuarants/:name", this.eventscontroller.deleteRestaurant);//Deletes event with matching ID
-        this.router.get("/restaurants", this.eventscontroller.getAllRestaurants);// GETS a list of restaurants
-        this.router.patch("/restaurants:name", this.eventscontroller.updateRestaurant);
+        this.router.get("/:name", this.eventscontroller.getRestaurant); //Get Events by ID
+        this.router.post("/", this.eventscontroller.postRestaurant); // create new events
+        this.router.delete("/:name", this.eventscontroller.deleteRestaurant);//Deletes event with matching ID
+        this.router.get("/", this.eventscontroller.getAllRestaurants);// GETS a list of restaurants
+        this.router.put("/:name", this.eventscontroller.updateRestaurant);
         
         
         return this.router;

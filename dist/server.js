@@ -5,8 +5,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const body_parser_1 = __importDefault(require("body-parser"));
 const express_1 = __importDefault(require("express"));
+// import cors from "cors"; Express middle ware 
 const EventsRouter_1 = require("./EventsHandling/EventsRouter");
-const router_1 = require("./router");
+const RestaurantRouter_1 = require("./Restaurant/RestaurantRouter");
+//import {ApiRouter} from "./router";
 class Application {
     constructor() {
         this.app = express_1.default();
@@ -35,9 +37,8 @@ class Application {
     }
     // setup routes for the express server
     buildRoutes() {
-        this.app.use("/api", new router_1.ApiRouter().getRouter());
-        this.app.use("/api", new EventsRouter_1.EventsRouter().getRouter()); // Router Builder for Events
-        // TODO: ADD ROUTE BUILDER FOR RESTAURANTS
+        this.app.use("/api/events", new EventsRouter_1.EventsRouter().getRouter()); // Router Builder for Events
+        this.app.use("/api/restaurants", new RestaurantRouter_1.RestaurantRouter().getRouter()); // Router for Restaurants
         // TODO: ADD ROUTE BUILDER FOR USERS
     }
 }
